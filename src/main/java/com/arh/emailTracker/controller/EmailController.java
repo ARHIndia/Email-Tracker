@@ -1,25 +1,27 @@
 package com.arh.emailTracker.controller;
 
-import java.util.UUID;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arh.emailTracker.pojo.EmailDetailsConsumer;
+import com.arh.emailTracker.serviceImpl.GenrateUUIDServiceImpl;
 
-@RestController("/v1")
+@RestController
+@RequestMapping("/v1")
 public class EmailController {
+	@Autowired
+	GenrateUUIDServiceImpl genrateUUIDService;
 
 	@PostMapping("/consumeEmail")
 	public String cosumeEmail(@RequestBody EmailDetailsConsumer emailDetailsConsumer) {
 
-		UUID uuid = UUID.randomUUID();
-		String uuidAsString = uuid.toString();
-		System.out.println("Your UUID is: " + uuidAsString);
-		return "Your UUID is: " + uuidAsString;
+		String uuid = genrateUUIDService.randomUUID();
+		return "Your UUID is: " + uuid;
 	}
 
 	@GetMapping("/getEmailContantById/{emailId}")
