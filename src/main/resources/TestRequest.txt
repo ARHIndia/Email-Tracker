@@ -20,5 +20,17 @@ http://localhost:8081/EmailTracker/v1/getEmailContantById/1
 
 
 
+-=================================
+DATBASE
+
+/*
+-- Query: SELECT * FROM email_tracker.email_details
+LIMIT 0, 1000
+
+-- Date: 2022-08-09 00:24
+*/
+
+INSERT INTO `` (`id`,`sender_name`,`sender_email`,`recipient_email`,`subject`,`body`,`recipient_name`,`track_code`,`send_date`,`sent`,`created_at`,`updated_at`) VALUES (1,'Rohit','rohitji405@gmail.com','rohit.a.negi@gmail.com','Demo','hi Sender','Rohit A Negi','456','9999-12-31 23:59:59',1,'2022-08-09 00:11:23','2022-08-09 00:11:23');
+
 
 
