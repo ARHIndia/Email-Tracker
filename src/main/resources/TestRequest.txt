@@ -1,0 +1,24 @@
+http://localhost:8081/EmailTracker/v1/getEmailContantById/1
+{
+    "id": 1,
+    "senderName": "Rohit",
+    "senderEmail": "rohitji405@gmail.com",
+    "recipientmail": "rohit.a.negi@gmail.com",
+    "subject": "Demo",
+    "body": "hi Sender",
+    "recipientName": "Rohit A Negi",
+    "trackCode": "456",
+    "sendDate": "9999-12-31T18:29:59.000+00:00",
+    "sent": 1,
+    "createdAt": "2022-08-08T18:41:23.000+00:00",
+    "updatedAt": "2022-08-08T18:41:23.000+00:00"
+}
+
+#http://localhost:8081/EmailTracker/v1/consumeEmail
+
+#http://localhost:8081/EmailTracker/v1/getEmailContantById/45
+
+
+
+
+

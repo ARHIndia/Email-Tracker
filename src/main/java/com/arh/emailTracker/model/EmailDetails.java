@@ -2,19 +2,42 @@ package com.arh.emailTracker.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "email_details")
 public class EmailDetails {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name = "sender_name")
 	private String senderName;
+	@Column(name = "sender_email")
 	private String senderEmail;
+	@Column(name = "recipient_email")
 	private String recipientmail;
+	@Column(name = "subject")
 	private String subject;
+	@Column(name = "body")
 	private String body;
-	private String recipient_name;
+	@Column(name = "recipient_name")
+	private String recipientName;
+	@Column(name = "track_code")
 	private String trackCode;
+	@Column(name = "send_date")
 	private Date sendDate;
+	@Column(name = "sent")
 	private Integer sent;
+	@Column(name = "created_at")
 	private Date createdAt;
+	@Column(name = "updated_at")
 	private Date updatedAt;
 
 	public Integer getId() {
@@ -65,12 +88,12 @@ public class EmailDetails {
 		this.body = body;
 	}
 
-	public String getRecipient_name() {
-		return recipient_name;
+	public String getRecipientName() {
+		return recipientName;
 	}
 
-	public void setRecipient_name(String recipient_name) {
-		this.recipient_name = recipient_name;
+	public void setRecipientName(String recipientName) {
+		this.recipientName = recipientName;
 	}
 
 	public String getTrackCode() {
@@ -117,7 +140,7 @@ public class EmailDetails {
 	public String toString() {
 		return "EmailDetails [id=" + id + ", senderName=" + senderName + ", senderEmail=" + senderEmail
 				+ ", recipientmail=" + recipientmail + ", subject=" + subject + ", body=" + body + ", recipient_name="
-				+ recipient_name + ", trackCode=" + trackCode + ", sendDate=" + sendDate + ", sent=" + sent
+				+ recipientName + ", trackCode=" + trackCode + ", sendDate=" + sendDate + ", sent=" + sent
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.arh.emailTracker.model.EmailDetails;
 import com.arh.emailTracker.pojo.EmailDetailsConsumer;
 import com.arh.emailTracker.serviceImpl.GenrateUUIDServiceImpl;
 
@@ -20,13 +21,14 @@ public class EmailController {
 	@PostMapping("/consumeEmail")
 	public String cosumeEmail(@RequestBody EmailDetailsConsumer emailDetailsConsumer) {
 
-		String uuid = genrateUUIDService.randomUUID();
-		return "Your UUID is: " + uuid;
+		EmailDetailsConsumer edc = genrateUUIDService.saveEmailDetails(emailDetailsConsumer);
+		return "Your EmailDetailsConsumer is: " + edc;
 	}
 
 	@GetMapping("/getEmailContantById/{emailId}")
-	public String emailContantById(@PathVariable("emailId") String emailId) {
-
-		return "getEmailContantById";
+	public EmailDetails emailContantById(@PathVariable("emailId") String emailId) {
+		System.out.println(emailId);
+		EmailDetails  emailDetails=genrateUUIDService.getEmailContantById(emailId);
+		return emailDetails;
 	}
 }

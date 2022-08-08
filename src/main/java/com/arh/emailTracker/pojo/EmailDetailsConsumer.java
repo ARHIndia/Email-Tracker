@@ -10,7 +10,7 @@ public class EmailDetailsConsumer {
 	private String recipientmail;
 	private String subject;
 	private String body;
-	private String recipient_name;
+	private String recipientName;
 	private String trackCode;
 	private Date sendDate;
 	private Integer sent;
@@ -65,12 +65,12 @@ public class EmailDetailsConsumer {
 		this.body = body;
 	}
 
-	public String getRecipient_name() {
-		return recipient_name;
+	public String getRecipientName() {
+		return recipientName;
 	}
 
-	public void setRecipient_name(String recipient_name) {
-		this.recipient_name = recipient_name;
+	public void setRecipientName(String recipientName) {
+		this.recipientName = recipientName;
 	}
 
 	public String getTrackCode() {
@@ -117,7 +117,7 @@ public class EmailDetailsConsumer {
 	public String toString() {
 		return "EmailDetails [id=" + id + ", senderName=" + senderName + ", senderEmail=" + senderEmail
 				+ ", recipientmail=" + recipientmail + ", subject=" + subject + ", body=" + body + ", recipient_name="
-				+ recipient_name + ", trackCode=" + trackCode + ", sendDate=" + sendDate + ", sent=" + sent
+				+ recipientName + ", trackCode=" + trackCode + ", sendDate=" + sendDate + ", sent=" + sent
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
