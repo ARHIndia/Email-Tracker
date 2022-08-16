@@ -1,11 +1,18 @@
 package com.arh.emailTracker.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arh.emailTracker.Utils.SendEmail;
@@ -25,6 +32,8 @@ public class EmailController {
 	EmailInfo emailInfo;
 	@Autowired
 	EmailServiceImpl emailServiceImpl;
+	@Autowired
+	SendEmail sendEmail;
 
 	@PostMapping("/consumeEmail")
 	public String cosumeEmail(@RequestBody EmailDetailsConsumer emailDetailsConsumer) {
@@ -45,18 +54,29 @@ public class EmailController {
 		// EmailInfo emailInfo = new EmailInfo();
 		EmailDetails emailDetails = genrateUUIDService.getEmailContantById(id);
 
-		SendEmail.send(emailInfo.getEmailId(), emailInfo.getSecretKey(), emailDetails.getRecipientmail(),
+		sendEmail.send(emailInfo.getEmailId(), emailInfo.getSecretKey(), emailDetails.getRecipientmail(),
 				emailDetails.getSubject(), emailDetails.getBody());
 
 		return "email sent";
 	}
-	
+
 	@GetMapping("/acknowledgement-email/{id}")
-	public String acknowledgementEmail(@PathVariable("id") String id) {
+	public @ResponseBody ResponseEntity<InputStreamResource> acknowledgementEmail(@PathVariable("id") String id)
+			throws IOException {
+		System.out.println("/acknowledgement-email/{id}-----"+id);
 		EmailTraking emailtrak = new EmailTraking();
 		emailtrak.setTrackCode(id);
+		
 		emailServiceImpl.saveEmailTraking(emailtrak);
-		return "acknowledged";
+		InputStream in = getClass().getResourceAsStream("/static/img/img.jpg");
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(in));
 	}
 
+	@GetMapping("/get-image-dynamic-type")
+	@ResponseBody
+	public ResponseEntity<InputStreamResource> getImageDynamicType() {
+		InputStream in =
+				getClass().getResourceAsStream("/static/img/img.jpg");
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(in));
+	}
 }

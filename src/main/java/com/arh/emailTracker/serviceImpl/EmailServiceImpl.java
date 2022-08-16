@@ -22,6 +22,6 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public EmailTraking saveEmailTraking(EmailTraking emailTraking) {
 
-		return emailTrakingRepo.save(emailTraking);
+		return emailTrakingRepo.saveAndFlush(emailTraking);
 	}
 }

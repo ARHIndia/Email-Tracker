@@ -11,6 +11,9 @@ public class EmailInfo {
 	
 	@Value("${arh.mail.secret.key}")
 	private String secretKey;
+	
+	@Value("${email.url}")
+	private String emailUrl;
 
 	public String getEmailId() {
 		return emailId;
@@ -28,4 +31,13 @@ public class EmailInfo {
 		this.secretKey = secretKey;
 	}
 
+	public String getEmailUrl() {
+		return emailUrl;
+	}
+
+	public void setEmailUrl(String emailUrl) {
+		this.emailUrl = emailUrl;
+	}
+
+	
 }

@@ -15,7 +15,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "email_details")
+@Table(name = "email_tracking")
 public class EmailTraking {
 
 	@Id
@@ -28,7 +28,7 @@ public class EmailTraking {
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "open_date")
+	@Column(name = "open_dates")
 	private Date openDate;
 	
 	@CreationTimestamp
@@ -83,7 +83,7 @@ public class EmailTraking {
 
 	@Override
 	public String toString() {
-		return "EmailTraking [id=" + id + ", trackCode=" + trackCode + ", openDate=" + openDate + ", createdAt="
+		return "EmailTraking [id=" + id + ", trackCode=" + trackCode + ", createdAt="
 				+ createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
