@@ -20,7 +20,7 @@ public class SendEmail {
 	@Autowired
 	EmailInfo emailInfo;
 
-	public void send(String from, String password, String to, String sub, String msg) {
+	public void send(String from, String password, String to, String sub, String msg , String id) {
 		// Get properties object
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -30,7 +30,7 @@ public class SendEmail {
 		props.put("mail.smtp.port", "587");
 		props.put("mail.smtp.starttls.enable", "true");
 		// get Session
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(from, password);
 			}
@@ -41,8 +41,8 @@ public class SendEmail {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject(sub);
 			// message.setText(msg); // send message
-			String htmlText = msg + "<img src='"+ emailInfo.getEmailUrl()
-					+"'alt=\"Girl in a jacket\" width=\"1\" height=\"1\">\r\n" + "";
+			String htmlText = msg + " <img src='"+ emailInfo.getEmailUrl()+"/"+id
+					+"'>\r\n" + "";
 			message.setContent(htmlText, "text/html");
 			Transport.send(message);
 			System.out.println("message sent successfully");

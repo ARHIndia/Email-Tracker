@@ -55,7 +55,7 @@ public class EmailController {
 		EmailDetails emailDetails = genrateUUIDService.getEmailContantById(id);
 
 		sendEmail.send(emailInfo.getEmailId(), emailInfo.getSecretKey(), emailDetails.getRecipientmail(),
-				emailDetails.getSubject(), emailDetails.getBody());
+				emailDetails.getSubject(), emailDetails.getBody(),id);
 
 		return "email sent";
 	}
