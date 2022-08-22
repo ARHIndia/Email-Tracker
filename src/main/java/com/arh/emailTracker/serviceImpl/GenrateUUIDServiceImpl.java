@@ -1,5 +1,6 @@
 package com.arh.emailTracker.serviceImpl;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,25 @@ public class GenrateUUIDServiceImpl implements GenrateUUIDService {
 		emaildetails.setRecipientmail(emailDetailsConsumer.getRecipientmail());
 		emaildetails.setRecipientName(emailDetailsConsumer.getRecipientName());
 		emaildetails.setTrackCode(randomUUID());
+		emaildetails.setSent(0);
 		emailDetailsRepo.save(emaildetails);
 		return emailDetailsConsumer;
 	}
 
+	@Override
 	public EmailDetails getEmailContantById(String id) {
 		return emailDetailsRepo.findById(Integer.parseInt(id));
-		
+
 	}
 
+	@Override
+	public List<EmailDetails> findBySent() {
+		return emailDetailsRepo.findBySent();
+
+	}
+	@Override
+	public void updateById(EmailDetails emailDetail) {
+		emailDetailsRepo.save(emailDetail);
+		
+	}
 }

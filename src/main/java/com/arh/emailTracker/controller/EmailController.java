@@ -2,11 +2,13 @@ package com.arh.emailTracker.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,5 +80,20 @@ public class EmailController {
 		InputStream in =
 				getClass().getResourceAsStream("/static/img/img.jpg");
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(in));
+	}
+
+	@Scheduled(fixedDelay = 10000)
+	public void emailSheduler() {
+
+		List<EmailDetails> emailDetails = genrateUUIDService.findBySent();
+
+		for (EmailDetails emailDetail : emailDetails) {
+
+			sendEmail.send(emailInfo.getEmailId(), emailInfo.getSecretKey(), emailDetail.getRecipientmail(),
+					emailDetail.getSubject(), emailDetail.getBody(), emailDetail.getId().toString());
+			emailDetail.setSent(1);
+			genrateUUIDService.updateById(emailDetail);
+		}
+
 	}
 }
